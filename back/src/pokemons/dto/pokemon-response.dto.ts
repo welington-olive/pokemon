@@ -1,27 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PokemonDetailDto {
-  @ApiProperty({ description: 'ID do pokemon', example: 25 })
+  @ApiProperty({ description: 'Pokemon ID', example: 25 })
   id: number;
 
-  @ApiProperty({ description: 'Nome do pokemon', example: 'pikachu' })
+  @ApiProperty({ description: 'Pokemon name', example: 'pikachu' })
   name: string;
 
   @ApiProperty({
-    description: 'Lista de tipos do pokemon',
+    description: 'List of pokemon types',
     example: ['electric'],
     type: [String],
   })
   types: string[];
 
   @ApiProperty({
-    description: 'URL da imagem do pokemon',
+    description: 'Pokemon image URL',
     example: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
   })
   image: string;
 
   @ApiProperty({
-    description: 'Lista de habilidades do pokemon (ordenadas alfabeticamente)',
+    description: 'List of pokemon abilities (alphabetically ordered)',
     example: ['lightning-rod', 'static'],
     type: [String],
   })

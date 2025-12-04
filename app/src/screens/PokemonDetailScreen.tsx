@@ -20,7 +20,7 @@ export const PokemonDetailScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Header title="Detalhes" onBack={() => navigation.goBack()} />
+      <Header title="Details" onBack={() => navigation.goBack()} />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: pokemon.image }} style={styles.image} />
@@ -29,7 +29,7 @@ export const PokemonDetailScreen: React.FC = () => {
           {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
         </Text>
         <View style={styles.section}>
-          <Text style={[textStyles.h3, styles.sectionTitle]}>Tipos</Text>
+          <Text style={[textStyles.h3, styles.sectionTitle]}>Types</Text>
           <View style={styles.typesContainer}>
             {pokemon.types.map((type, index) => (
               <View key={index} style={styles.typeBadge}>
@@ -39,7 +39,7 @@ export const PokemonDetailScreen: React.FC = () => {
           </View>
         </View>
         <View style={styles.section}>
-          <Text style={[textStyles.h3, styles.sectionTitle]}>Habilidades</Text>
+          <Text style={[textStyles.h3, styles.sectionTitle]}>Abilities</Text>
           {pokemon.abilities.map((ability, index) => (
             <View key={index} style={styles.abilityItem}>
               <Text style={textStyles.body}>

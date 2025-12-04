@@ -4,7 +4,7 @@ import { Type } from 'class-transformer';
 
 export class PokemonQueryDto {
   @ApiProperty({
-    description: 'Número de Pokémon por página (padrão: 20)',
+    description: 'Number of Pokemons per page (default: 20)',
     example: 20,
     minimum: 1,
     required: false,
@@ -12,12 +12,12 @@ export class PokemonQueryDto {
   })
   @IsOptional()
   @Type(() => Number)
-  @IsInt({ message: 'Limit deve ser um número inteiro' })
-  @Min(1, { message: 'Limit deve ser maior ou igual a 1' })
+  @IsInt({ message: 'Limit must be an integer' })
+  @Min(1, { message: 'Limit must be greater than or equal to 1' })
   limit?: number = 20;
 
   @ApiProperty({
-    description: 'Ponto de início da lista para paginação (padrão: 0)',
+    description: 'List offset for pagination (default: 0)',
     example: 0,
     minimum: 0,
     required: false,
@@ -25,17 +25,17 @@ export class PokemonQueryDto {
   })
   @IsOptional()
   @Type(() => Number)
-  @IsInt({ message: 'Offset deve ser um número inteiro' })
-  @Min(0, { message: 'Offset deve ser maior ou igual a 0' })
+  @IsInt({ message: 'Offset must be an integer' })
+  @Min(0, { message: 'Offset must be greater than or equal to 0' })
   offset?: number = 0;
 
   @ApiProperty({
-    description: 'String para filtrar Pokémon por nome (opcional)',
+    description: 'String to filter Pokemon by name (optional)',
     example: 'pikachu',
     required: false,
   })
   @IsOptional()
-  @IsString({ message: 'NameFilter deve ser uma string' })
+  @IsString({ message: 'NameFilter must be a string' })
   nameFilter?: string;
 }
 

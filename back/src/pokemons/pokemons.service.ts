@@ -40,10 +40,10 @@ export class PokemonsService {
       return pokemons;
     } catch (error) {
       if (error.response?.status === 404) {
-        throw new NotFoundException('Pokémon não encontrado');
+        throw new NotFoundException('Pokemon not found');
       }
       throw new HttpException(
-        'Erro ao buscar pokemons da API',
+        'Error fetching pokemons from API',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -66,7 +66,7 @@ export class PokemonsService {
         return [];
       }
       throw new HttpException(
-        'Erro ao buscar pokemon',
+        'Error fetching pokemon',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -78,7 +78,7 @@ export class PokemonsService {
       return this.mapPokemonData(response.data);
     } catch (error) {
       throw new HttpException(
-        'Erro ao buscar detalhes do pokemon',
+        'Error fetching pokemon details',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

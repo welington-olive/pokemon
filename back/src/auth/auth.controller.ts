@@ -19,14 +19,14 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: 'Registrar novo usuário' })
+  @ApiOperation({ summary: 'Register new user' })
   @ApiResponse({
     status: 201,
-    description: 'Usuário registrado com sucesso',
+    description: 'User registered successfully',
     type: AuthResponseDto,
   })
-  @ApiResponse({ status: 409, description: 'Email já está em uso' })
-  @ApiResponse({ status: 400, description: 'Dados inválidos' })
+  @ApiResponse({ status: 409, description: 'Email already in use' })
+  @ApiResponse({ status: 400, description: 'Invalid data' })
   async register(
     @Body(ValidationPipe) registerDto: RegisterDto,
   ): Promise<AuthResponseDto> {
@@ -35,14 +35,14 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Fazer login' })
+  @ApiOperation({ summary: 'Login' })
   @ApiResponse({
     status: 200,
-    description: 'Login realizado com sucesso',
+    description: 'Login successful',
     type: AuthResponseDto,
   })
-  @ApiResponse({ status: 401, description: 'Credenciais inválidas' })
-  @ApiResponse({ status: 400, description: 'Dados inválidos' })
+  @ApiResponse({ status: 401, description: 'Invalid credentials' })
+  @ApiResponse({ status: 400, description: 'Invalid data' })
   async login(
     @Body(ValidationPipe) loginDto: LoginDto,
   ): Promise<AuthResponseDto> {

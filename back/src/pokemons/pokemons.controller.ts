@@ -25,17 +25,17 @@ export class PokemonsController {
 
   @Get()
   @ApiOperation({
-    summary: 'Listar pokemons',
+    summary: 'List pokemons',
     description:
-      'Retorna uma lista paginada de pokemons. Pode ser filtrada por nome. As habilidades são retornadas em ordem alfabética.',
+      'Returns a paginated list of pokemons. Can be filtered by name. Abilities are returned in alphabetical order.',
   })
   @ApiResponse({
     status: 200,
-    description: 'Lista de pokemons retornada com sucesso',
+    description: 'Pokemon list returned successfully',
     type: [PokemonDetailDto],
   })
-  @ApiResponse({ status: 401, description: 'Não autorizado' })
-  @ApiResponse({ status: 404, description: 'Pokémon não encontrado' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 404, description: 'Pokemon not found' })
   async findAll(
     @Query(ValidationPipe) query: PokemonQueryDto,
   ): Promise<PokemonDetailDto[]> {

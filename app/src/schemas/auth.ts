@@ -1,16 +1,16 @@
 import { z } from 'zod';
 
 export const loginSchema = z.object({
-  email: z.string().email('Email inválido'),
-  password: z.string().min(1, 'Senha é obrigatória'),
+  email: z.string().email('Invalid email'),
+  password: z.string().min(1, 'Password is required'),
 });
 
 export const registerSchema = z.object({
-  email: z.string().email('Email inválido'),
-  password: z.string().min(6, 'Senha deve ter no mínimo 6 caracteres'),
-  confirmPassword: z.string().min(6, 'Confirmação de senha é obrigatória'),
+  email: z.string().email('Invalid email'),
+  password: z.string().min(6, 'Password must be at least 6 characters long'),
+  confirmPassword: z.string().min(6, 'Password confirmation is required'),
 }).refine((data) => data.password === data.confirmPassword, {
-  message: 'As senhas não coincidem',
+  message: 'Passwords do not match',
   path: ['confirmPassword'],
 });
 

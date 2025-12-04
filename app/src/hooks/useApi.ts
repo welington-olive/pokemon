@@ -15,7 +15,7 @@ export const useApi = <T,>() => {
       return result;
     } catch (err: any) {
       const errorMessage =
-        err.response?.data?.message || err.message || 'Erro desconhecido';
+        err.response?.data?.message || err.message || 'Unknown error';
       setError(errorMessage);
       throw err;
     } finally {

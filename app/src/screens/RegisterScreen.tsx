@@ -67,7 +67,7 @@ export const RegisterScreen: React.FC = () => {
           name="password"
           render={({ field: { onChange, value } }) => (
             <PasswordInput
-              label="Senha"
+              label="Password"
               value={value || ''}
               onChangeText={onChange}
               error={errors.password?.message}
@@ -79,7 +79,7 @@ export const RegisterScreen: React.FC = () => {
           name="confirmPassword"
           render={({ field: { onChange, value } }) => (
             <PasswordInput
-              label="Confirmar Senha"
+              label="Confirm Password"
               value={value || ''}
               onChangeText={onChange}
               error={errors.confirmPassword?.message}
@@ -87,13 +87,13 @@ export const RegisterScreen: React.FC = () => {
           )}
         />
         <Button
-          label="Cadastrar"
+          label="Register"
           onPress={handleSubmit(onSubmit)}
           loading={loading}
         />
         <Footer
-          text="Já tem uma conta?"
-          linkText="Faça login"
+          text="Already have an account?"
+          linkText="Login"
           onLinkPress={() => navigation.navigate('Login')}
         />
       </View>

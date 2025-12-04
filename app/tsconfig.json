@@ -21,7 +21,8 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
+    "svg.d.ts"
   ],
   "exclude": [
     "node_modules",

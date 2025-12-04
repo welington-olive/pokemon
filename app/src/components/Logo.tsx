@@ -1,15 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper';
-import { textStyles } from '../theme/text';
-import { colors } from '../theme/colors';
+import LogoIcon from '../../assets/logo.svg';
 
 export const Logo: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={[textStyles.h1, { color: colors.primary }]}>
-        Pokémon
-      </Text>
+      <LogoIcon width={200} height={100} />
     </View>
   );
 };

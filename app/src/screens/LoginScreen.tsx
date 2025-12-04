@@ -67,7 +67,7 @@ export const LoginScreen: React.FC = () => {
           name="password"
           render={({ field: { onChange, value } }) => (
             <PasswordInput
-              label="Senha"
+              label="Password"
               value={value || ''}
               onChangeText={onChange}
               error={errors.password?.message}
@@ -75,13 +75,13 @@ export const LoginScreen: React.FC = () => {
           )}
         />
         <Button
-          label="Entrar"
+          label="Login"
           onPress={handleSubmit(onSubmit)}
           loading={loading}
         />
         <Footer
-          text="Não tem uma conta?"
-          linkText="Cadastre-se"
+          text="Don't have an account?"
+          linkText="Register"
           onLinkPress={() => navigation.navigate('Register')}
         />
       </View>

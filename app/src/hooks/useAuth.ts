@@ -45,7 +45,7 @@ export const useAuth = () => {
       setUser(userData);
     } catch (error: any) {
       throw new Error(
-        error.response?.data?.message || 'Erro ao fazer login'
+        error.response?.data?.message || 'Error logging in'
       );
     }
   };
@@ -68,7 +68,7 @@ export const useAuth = () => {
       setUser(userData);
     } catch (error: any) {
       throw new Error(
-        error.response?.data?.message || 'Erro ao fazer cadastro'
+        error.response?.data?.message || 'Error registering'
       );
     }
   };
