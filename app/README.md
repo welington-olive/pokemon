@@ -23,7 +23,7 @@ yarn install
 ## Executar
 
 ```bash
-yarn start
+yar start
 ```
 
 ## Estrutura
@@ -41,4 +41,4 @@ yarn start
 
 ## API
 
-O app consome a API em `http://localhost:3000`. Certifique-se de que o backend está rodando.
+O app consome a API em `https://pokemon-bu5t.onrender.com`. Certifique-se de que o backend está rodando.
