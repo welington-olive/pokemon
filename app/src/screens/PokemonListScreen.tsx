@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { View, FlatList, TouchableOpacity, Image, ActivityIndicator, Text, Keyboard } from 'react-native';
 import { Searchbar, Appbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -6,84 +6,51 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 
 type PokemonListScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'PokemonList'>;
-import { pokemonService } from '../services/pokemonService';
 import { Pokemon } from '../types';
 import { Header, Toast } from '../components';
 import { useAuthContext } from '../contexts/AuthContext';
 import { colors } from '../theme/colors';
-
-const LIMIT = 20;
+import { usePokemons } from '../hooks/queries/usePokemons';
+import { useDebounce } from '../hooks/useDebounce';
 
 export const PokemonListScreen: React.FC = () => {
   const navigation = useNavigation<PokemonListScreenNavigationProp>();
   const { logout } = useAuthContext();
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [offset, setOffset] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
-  useEffect(() => {
-    resetAndLoad();
-  }, []);
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      resetAndLoad();
-      Keyboard.dismiss();
-    }, 500);
-    return () => clearTimeout(timeoutId);
-  }, [searchQuery]);
-
-  const resetAndLoad = async () => {
-    setOffset(0);
-    setHasMore(true);
-    setPokemons([]);
-    await loadPokemons(0, true);
-  };
-
-  const loadPokemons = async (currentOffset: number = offset, isInitialLoad: boolean = false) => {
-    try {
-      if (isInitialLoad) {
-        setLoading(true);
-      } else {
-        setLoadingMore(true);
-      }
-      
-      const data = await pokemonService.getAll(LIMIT, currentOffset, searchQuery || undefined);
-      
-      if (isInitialLoad) {
-        setPokemons(data);
-      } else {
-        setPokemons(prev => [...prev, ...data]);
-      }
-      
-      // Update offset for next load
-      const nextOffset = currentOffset + data.length;
-      setOffset(nextOffset);
-      
-      // If we got fewer items than requested, we've reached the end
-      if (data.length < LIMIT) {
-        setHasMore(false);
-      } else {
-        setHasMore(true);
-      }
-    } catch (error: any) {
-      setToastMessage(error.message || 'Erro ao carregar pokemons');
-      setToastVisible(true);
-      setHasMore(false);
-    } finally {
-      setLoading(false);
-      setLoadingMore(false);
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    isLoading,
+    error,
+  } = usePokemons(
+    {
+      nameFilter: debouncedSearchQuery || undefined,
+      enabled: true,
     }
-  };
+  );
+
+  const pokemons: Pokemon[] = useMemo(() => {
+    return (data?.pages.flat() ?? []) as Pokemon[];
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      setToastMessage((error as Error).message || 'Erro ao carregar pokemons');
+      setToastVisible(true);
+    }
+  }, [error]);
 
   const handleLoadMore = () => {
-    if (!loadingMore && hasMore && !loading && !searchQuery) {
-      loadPokemons(offset, false);
+    if (hasNextPage && !isFetchingNextPage && !debouncedSearchQuery) {
+      fetchNextPage();
     }
   };
 
@@ -136,11 +103,10 @@ export const PokemonListScreen: React.FC = () => {
             style={{ backgroundColor: colors.surface }}
             onSubmitEditing={() => {
               Keyboard.dismiss();
-              resetAndLoad();
             }}
           />
         </View>
-        {loading ? (
+        {isLoading ? (
           <View className="flex-1 justify-center items-center">
             <ActivityIndicator size="large" color={colors.primary} />
           </View>
@@ -155,7 +121,7 @@ export const PokemonListScreen: React.FC = () => {
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.5}
             ListFooterComponent={
-              hasMore && !searchQuery ? (
+              hasNextPage && !debouncedSearchQuery ? (
                 <View className="py-4 items-center">
                   <ActivityIndicator size="small" color={colors.primary} />
                 </View>

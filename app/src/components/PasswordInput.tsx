@@ -25,7 +25,6 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
       mode="outlined"
       secureTextEntry={secureTextEntry}
       error={!!error}
-      className="mb-4 bg-background"
       outlineColor={colors.border}
       activeOutlineColor={colors.primary}
       textColor={colors.text.primary}

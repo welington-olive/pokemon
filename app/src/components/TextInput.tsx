@@ -31,7 +31,6 @@ export const TextInput: React.FC<TextInputProps> = ({
       keyboardType={keyboardType}
       autoCapitalize={autoCapitalize}
       autoComplete={autoComplete}
-      className="mb-4 bg-background"
       outlineColor={colors.border}
       activeOutlineColor={colors.primary}
       textColor={colors.text.primary}
