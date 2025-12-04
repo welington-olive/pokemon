@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { colors } from '../theme/colors';
 
@@ -26,7 +25,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
       mode="outlined"
       secureTextEntry={secureTextEntry}
       error={!!error}
-      style={styles.input}
+      className="mb-4 bg-background"
       outlineColor={colors.border}
       activeOutlineColor={colors.primary}
       textColor={colors.text.primary}
@@ -39,11 +38,4 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
     />
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    marginBottom: 16,
-    backgroundColor: colors.background,
-  },
-});
 

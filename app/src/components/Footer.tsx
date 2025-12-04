@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
 import { textStyles } from '../theme/text';
@@ -16,7 +16,7 @@ export const Footer: React.FC<FooterProps> = ({
   onLinkPress,
 }) => {
   return (
-    <View style={styles.container}>
+    <View className="mt-6 items-center">
       <Text style={[textStyles.bodySmall, { color: colors.text.secondary }]}>
         {text}{' '}
         <Text
@@ -29,11 +29,4 @@ export const Footer: React.FC<FooterProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 24,
-    alignItems: 'center',
-  },
-});
 

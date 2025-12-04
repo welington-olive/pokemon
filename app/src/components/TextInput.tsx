@@ -1,5 +1,4 @@
 import React from 'react';
-import { TextInput as RNTextInput, StyleSheet } from 'react-native';
 import { TextInput as PaperTextInput } from 'react-native-paper';
 import { colors } from '../theme/colors';
 
@@ -32,18 +31,11 @@ export const TextInput: React.FC<TextInputProps> = ({
       keyboardType={keyboardType}
       autoCapitalize={autoCapitalize}
       autoComplete={autoComplete}
-      style={styles.input}
+      className="mb-4 bg-background"
       outlineColor={colors.border}
       activeOutlineColor={colors.primary}
       textColor={colors.text.primary}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    marginBottom: 16,
-    backgroundColor: colors.background,
-  },
-});
 

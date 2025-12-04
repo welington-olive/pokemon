@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { colors } from '../theme/colors';
 
@@ -18,14 +18,8 @@ export const Header: React.FC<HeaderProps> = ({
     <Appbar.Header style={{ backgroundColor: colors.primary }}>
       {onBack && <Appbar.BackAction onPress={onBack} color={colors.background} />}
       <Appbar.Content title={title} titleStyle={{ color: colors.background }} />
-      {rightAction && <View style={styles.rightAction}>{rightAction}</View>}
+      {rightAction && <View className="mr-2">{rightAction}</View>}
     </Appbar.Header>
   );
 };
-
-const styles = StyleSheet.create({
-  rightAction: {
-    marginRight: 8,
-  },
-});
 

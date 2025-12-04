@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuthContext } from '../contexts/AuthContext';
@@ -43,10 +43,11 @@ export const LoginScreen: React.FC = () => {
 
   return (
     <ScrollView
-      contentContainerStyle={styles.container}
+      contentContainerStyle={{ flexGrow: 1 }}
+      className="bg-background p-6"
       keyboardShouldPersistTaps="handled"
     >
-      <View style={styles.content}>
+      <View className="flex-1 justify-center">
         <Logo />
         <Controller
           control={control}
@@ -94,16 +95,4 @@ export const LoginScreen: React.FC = () => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: colors.background,
-    padding: 24,
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
 

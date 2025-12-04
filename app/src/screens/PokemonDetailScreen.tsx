@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, ScrollView, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -19,29 +19,29 @@ export const PokemonDetailScreen: React.FC = () => {
   const { pokemon } = route.params;
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-background">
       <Header title="Details" onBack={() => navigation.goBack()} />
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.imageContainer}>
-          <Image source={{ uri: pokemon.image }} style={styles.image} />
+      <ScrollView contentContainerStyle={{ padding: 24, alignItems: 'center' }}>
+        <View className="mb-6">
+          <Image source={{ uri: pokemon.image }} className="w-[200px] h-[200px]" />
         </View>
-        <Text style={[textStyles.h1, styles.name]}>
+        <Text style={[textStyles.h1, { marginBottom: 32, textAlign: 'center' }]}>
           {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
         </Text>
-        <View style={styles.section}>
-          <Text style={[textStyles.h3, styles.sectionTitle]}>Types</Text>
-          <View style={styles.typesContainer}>
+        <View className="w-full mb-6">
+          <Text style={[textStyles.h3, { marginBottom: 16 }]}>Types</Text>
+          <View className="flex-row flex-wrap">
             {pokemon.types.map((type, index) => (
-              <View key={index} style={styles.typeBadge}>
-                <Text style={styles.typeText}>{type}</Text>
+              <View key={index} className="bg-primary px-4 py-2 rounded-2xl mr-2 mb-2">
+                <Text className="text-background text-sm font-semibold">{type}</Text>
               </View>
             ))}
           </View>
         </View>
-        <View style={styles.section}>
-          <Text style={[textStyles.h3, styles.sectionTitle]}>Abilities</Text>
+        <View className="w-full mb-6">
+          <Text style={[textStyles.h3, { marginBottom: 16 }]}>Abilities</Text>
           {pokemon.abilities.map((ability, index) => (
-            <View key={index} style={styles.abilityItem}>
+            <View key={index} className="bg-surface p-3 rounded-lg mb-2 border border-border">
               <Text style={textStyles.body}>
                 {ability.charAt(0).toUpperCase() + ability.slice(1)}
               </Text>
@@ -52,58 +52,4 @@ export const PokemonDetailScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  content: {
-    padding: 24,
-    alignItems: 'center',
-  },
-  imageContainer: {
-    marginBottom: 24,
-  },
-  image: {
-    width: 200,
-    height: 200,
-  },
-  name: {
-    marginBottom: 32,
-    textAlign: 'center',
-  },
-  section: {
-    width: '100%',
-    marginBottom: 24,
-  },
-  sectionTitle: {
-    marginBottom: 16,
-  },
-  typesContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  typeBadge: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 16,
-    marginRight: 8,
-    marginBottom: 8,
-  },
-  typeText: {
-    color: colors.background,
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  abilityItem: {
-    backgroundColor: colors.surface,
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-});
 

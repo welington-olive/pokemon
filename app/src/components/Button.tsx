@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { Button as PaperButton } from 'react-native-paper';
 import { colors } from '../theme/colors';
 
@@ -24,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={onPress}
       loading={loading}
       disabled={disabled || loading}
-      style={styles.button}
+      className="mt-2 mb-4"
       buttonColor={mode === 'contained' ? colors.primary : undefined}
       textColor={mode === 'contained' ? colors.background : colors.primary}
     >
@@ -32,11 +31,4 @@ export const Button: React.FC<ButtonProps> = ({
     </PaperButton>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    marginTop: 8,
-    marginBottom: 16,
-  },
-});
 
